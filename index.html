@@ -17,18 +17,17 @@
     </div>
     <div id="table"></div>
     <script>
-      var eventSelect = $('#eventSelect').MPEventSelect();
-      var propSelect  = $('#propSelect').MPPropertySelect();
+      MP.api.setCredentials('38c148dea80e5275078afc8d3ed8db10', 'bf7a39e99c9d0a006e112693736a3e20')
       var dateSelect  = $('#dateSelect').MPDatepicker();
-      var eventGraph  = $('#graph').MPChart({chartType: 'line'});
+      var eventGraph  = $('#graph').MPChart({chartType: 'bar'});
       var eventTable  = $('#table').MPTable({
         showPercentages: true,
         firstColHeader: 'Event'
       });
 
       var runQuery = function() {
-        var eventName = eventSelect.MPEventSelect('value'),
-            propName  = propSelect.MPPropertySelect('value'),
+        var eventName = 'Game Played',
+            propName  = 'Campaign Source',
             dateRange = dateSelect.MPDatepicker('value');
 
         if (eventName) {
@@ -38,12 +37,9 @@
           });
         }
       };
-      eventSelect.on('change', function(e, eventName) {
-        propSelect.MPPropertySelect('setEvent', eventName);
-        $("#by").show();
-        runQuery();
-      });
-      propSelect.on('change', runQuery);
+      
+      runQuery();
+
       dateSelect.on('change', runQuery);
     </script>
   </body>
